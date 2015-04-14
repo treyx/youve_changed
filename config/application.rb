@@ -10,5 +10,18 @@ module YouveChanged
   class Application < Rails::Application
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.smtp_settings = {
+      address:              "smtp.mandrillapp.com",
+      port:                 "587",
+      domain:               "youvechanged.com",
+      user_name:            "f7a51640@opayq.com",
+      password:             "Meb018km1JaIHRhF-JtzNw",
+      authentication:       "plain",
+      enable_starttls_auto: true
+
+    }
   end
 end
