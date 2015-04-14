@@ -1,13 +1,13 @@
-require 'test_helper'
+require_relative "../test_helper"
 
 class FriendMailerTest < ActionMailer::TestCase
-  def test_it_sends_an_email
-    user = User.create(name: 'Changy McChangerson', email: 'changy@example.com')
-    FriendMailer.inform(user, 'test@example.com').deliver_now
-    result = ActionMailer::Base.deliveries.last
+  def test_it_sends_email
+    sender = User.create(name: "Richard", email: "richard@example.com")
+    FriendMailer.notify(sender, "test@example.com").deliver_now
 
-    assert result
-    assert result.to.include? "test@example.com"
-    assert_equal "Changy McChangerson says you've changed.", result.subject
+    email = ActionMailer::Base.deliveries.last
+
+    assert_equal "test@example.com", email.to.first
+    assert_equal "Richard says you've changed", email.subject
   end
 end
